@@ -40,15 +40,15 @@ function populateMatchRecord($row, snap) {
 
     $('td.won, td.lost', $row).html('');
     currentMatchRef.child('lost').on('child_added', snap => {
-        playersRef.child(snap.key+'/name').once('value', snap => {
-            var name = snap.val();
-            $('td.lost', $row).append('<span class="badge badge-pill badge-danger">'+name+'</span>')
+        playersRef.child(snap.key+'/name').once('value', snapVal => {
+            var name = snapVal.val();
+            $('td.lost', $row).append('<button type="button" data-id="'+snap.key+'" class="userHighlight btn btn-outline-danger btn-sm mr-1"><i class="fa fa-check selectedMark"></i> '+name+'</button>')
         })
     });
     currentMatchRef.child('won').on('child_added', snap => {
-        playersRef.child(snap.key+'/name').once('value', snap => {
-            var name = snap.val();
-            $('td.won', $row).append('<span class="badge badge-pill badge-success">'+name+'</span>')
+        playersRef.child(snap.key+'/name').once('value', snapVal => {
+            var name = snapVal.val();
+            $('td.won', $row).append('<button type="button" data-id="'+snap.key+'" class="userHighlight btn btn-outline-success btn-sm mr-1"><i class="fa fa-check selectedMark"></i> '+name+'</button>')
         })
     });
 
@@ -56,6 +56,44 @@ function populateMatchRecord($row, snap) {
 
     $('#matchList tbody').prepend($row);
 }
+
+/**
+ * Listen for the bubble event since badges are dynamic
+ */
+
+ //Change the appearance of the selected user
+$('#matchList').on('click', '.userHighlight', function(e){
+    e.preventDefault();
+    var $target = $(e.target);
+    var targetUserId = $target.attr('data-id');
+    if ($target.hasClass('selectedUser')){
+        //deselect
+        $('#matchList .won .userHighlight[data-id="'+targetUserId+'"]')
+                .removeClass('btn-info selectedUser')
+                .addClass('btn-outline-success');
+        $('#matchList .lost .userHighlight[data-id="'+targetUserId+'"]')
+                .removeClass('btn-info selectedUser')
+                .addClass('btn-outline-danger');
+    }
+    else {
+        //select
+        $('#matchList .userHighlight[data-id="'+targetUserId+'"]')
+                .removeClass('btn-success btn-danger')
+                .addClass('btn-info selectedUser');
+    }
+});
+//Highlight all other instances of the hovered user
+$('#matchList').on('mouseenter', '.userHighlight', function(e){
+    var targetUserId = $(e.target).attr('data-id');
+    $('#matchList .won .btn-outline-success.userHighlight[data-id="'+targetUserId+'"]').removeClass('btn-outline-success').addClass('btn-success');
+    $('#matchList .lost .btn-outline-danger.userHighlight[data-id="'+targetUserId+'"]').removeClass('btn-outline-danger').addClass('btn-danger');
+});
+//UN-highlight all other instances of the hovered user
+$('#matchList').on('mouseleave', '.userHighlight', function(e){
+    var targetUserId = $(e.target).attr('data-id');
+    $('#matchList .won .btn-success.userHighlight[data-id="'+targetUserId+'"]').removeClass('btn-success').addClass('btn-outline-success');
+    $('#matchList .lost .btn-danger.userHighlight[data-id="'+targetUserId+'"]').removeClass('btn-danger').addClass('btn-outline-danger');
+});
 
 /**
  * CREATE PLAYER MODAL

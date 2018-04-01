@@ -74,6 +74,13 @@ body {
   margin-top: 5px;
 }
 
+#matchList .selectedMark {
+  display: none;
+}
+
+#matchList button.selectedUser .selectedMark {
+  display: inline;
+}
 /*
  * Navbar
  */
