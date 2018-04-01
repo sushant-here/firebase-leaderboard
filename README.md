@@ -5,6 +5,11 @@ Leaderboard webapp utilising Firebase Database
 
 To access the hosted leaderboard go to:... https://fooseball-a0b25.firebaseapp.com/
 
+OR SCAN using your phone:...
+
+![QR Code](http://chart.apis.google.com/chart?cht=qr&chs=300x300&chl=https%3A//fooseball-a0b25.firebaseapp.com/&chld=H|0)
+
+
 ## Structure
 ```
 https://github.com/sushant40/firebase-leaderboard
