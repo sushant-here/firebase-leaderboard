@@ -1,0 +1,189 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Dashboard Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c" crossorigin="anonymous"></script>
+
+    <!-- Custom styles for this template -->
+    <link href="dashboard.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Leader Board</a>
+      <div class="my-2 mr-2 my-lg-0">
+          <a href="#" class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#createPlayerModal"><span data-feather="plus-circle"></span> Add Player</a>
+          <a href="#" class="btn btn-primary my-2 my-sm-0"  data-toggle="modal" data-target="#recordMatchModal"><i class="fas fa-plus"></i> Record Match</a>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+          <div class="sidebar-sticky">
+
+            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+              <span>Players</span>
+                
+              </a>
+            </h6>
+            <ul class="nav flex-column mb-2">
+              <li id="playerList" class="nav-item">
+              </li>
+            </ul>
+          </div>
+        </nav>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+            <h1 class="h2">Leaderboard</h1>
+          </div>
+
+          <canvas id="chartCanvas"></canvas>
+
+          <h2>Match History</h2>
+          <div class="table-responsive">
+            <table id="matchList" class="table table-striped table-sm">
+              <thead>
+                <tr>
+                  <th width="230">Time</th>
+                  <th>Winners</th>
+                  <th>Loosers</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <!-- Fragments for creating dynamic ui elements -->
+    <div id="fragmentsContainer" style="display:none!important">
+      <a class="card bg-light ml-3 mr-3 mb-3 playerSummaryCard">
+        <div class="card-header"><span class='playerName'>playerName</span> <span class="badge badge-pill badge-info playerPoints">Info</span></div>
+        <table class="card-body table table-sm">
+          <tbody>
+            <tr class="won"><th>Won</th><td><i class="fa fa-cog fa-spin"/></td></tr>
+            <tr class="lost"><th>Lost</th><td><i class="fa fa-cog fa-spin"/></td></tr>
+          </tbody>
+        </table>
+      </a>      
+    </div>
+
+    <!-- Modal for create player -->
+    <div class="modal fade" id="createPlayerModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Create Player</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                        <div class="input-group input-group-lg">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-lg">Name:</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        <i class="fas fa-times"></i>
+                        Close
+                    </button>
+                    <button id="doCreatePlayer" type="button" class="btn btn-primary">
+                        <i class="fas fa-save"></i>
+                        Save changes
+                    </button>
+                </div>
+            </div>
+            </div>
+        </div>
+
+    <!-- Modal for record match -->
+    <div class="modal fade" id="recordMatchModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Record Match</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <table class="modal-body table">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Player</th>
+                            <th class="text-center" width="150">Outcome</th>
+                            <th class="text-center" width="50"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <div class="modal-footer">
+                    <button id="addPlayerToMatch" type="button" class="btn btn-info">
+                        <i class="fas fa-plus"></i>
+                        Add player
+                    </button>
+                    <button id="saveChanges" type="button" class="btn btn-primary">
+                        <i class="fas fa-save"></i>
+                        Save changes
+                    </button>
+                </div>
+            </div>
+            </div>
+        </div>
+  
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyAftxnNgbDOudvncS_92FZgZXKsRAaxg6w",
+        authDomain: "fooseball-a0b25.firebaseapp.com",
+        databaseURL: "https://fooseball-a0b25.firebaseio.com",
+        projectId: "fooseball-a0b25",
+        storageBucket: "fooseball-a0b25.appspot.com",
+        messagingSenderId: "743272699324"
+      };
+      firebase.initializeApp(config);
+    </script>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+        
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+    <script>
+      feather.replace()
+    </script>
+
+    <script src="script.js"></script>
+    <script src="leaderChart.js"></script>
+    <!-- Graphs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+  </body>
+</html>
