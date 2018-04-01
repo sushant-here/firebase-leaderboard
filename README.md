@@ -24,8 +24,17 @@ The public folder can be statically deployed and used to serve up the webapp.
 
 1. Start by creating a HTML project on the Google Firebase console... https://console.firebase.google.com
 2. in /public/index.html -> Update the 'config' object that is used to initilise Firebase with your own project... search for 'firebase.initializeApp'
+3. Update the database security settings. If your just testing it out update the rules to make everything public. IE...
+```
+{
+  "rules": {
+    ".read": "true",
+    ".write": "true"
+  }
+}
+```
 
-Once you start 'using' the webapp it automatically create the necssary matches and players nodes/tables in the database. If you have any issues in the future just delete these two nodes from the Firebase database console
+Once you start 'using' the webapp it will automatically create the necssary matches and players nodes/tables in the database. You can freely delete these two nodes from the Firebase database console - though you will lose your points!
 
 ## Running locally
 
