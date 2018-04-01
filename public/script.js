@@ -4,7 +4,7 @@ var matchesRef = firebase.database().ref('matches');
 $(document).ready(function(){
     
     $('#playerList').html('')
-    playersRef.orderByChild("totalPoints").limitToLast(3).on('child_added', snap => {
+    playersRef.orderByChild("totalPoints").on('child_added', snap => {
         var playerSummaryCard = $("#fragmentsContainer .playerSummaryCard").clone();
         populatePlayerRecord(playerSummaryCard, snap);
         $('#playerList').prepend(playerSummaryCard);
