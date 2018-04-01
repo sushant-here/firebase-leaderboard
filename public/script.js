@@ -91,7 +91,7 @@ $('#recordMatchModal #addPlayerToMatch').on('click', function(){
 });
 
 /**
- * Ensure that no 2 pickers can have the same player selected
+ * Ensure that no 2 pickers can have the same player selected (doesnt work on mobile)
  */
 $('#recordMatchModal').on('change', '.playerPicker', function(e){
     var modal = $('#recordMatchModal');
@@ -118,6 +118,23 @@ $('#recordMatchModal').on('change', '.playerPicker', function(e){
  */
 $('#recordMatchModal #saveChanges').on('click', function(){
     var modal = $('#recordMatchModal');
+
+    // This duplicate detection is mainly needed for mobile
+    var duplicatePlayer = undefined;
+    var selectedPlayers={}
+    $('.playerPicker option:selected', modal).each(function(i,e){
+        var playerID = $(e).attr('val');
+        if (selectedPlayers[playerID] == undefined) {
+            selectedPlayers[playerID] = playerID;
+        }
+        else {
+            duplicatePlayer = $(e).val();
+        }
+    });
+    if (duplicatePlayer != undefined) {
+        alert(duplicatePlayer + ' has been selected multiple times. Please choose another player.');
+        return;
+    }
     
     if ($('.playerPicker', modal).length < 2){
         alert('Please ensure there are atleast 2 players');
