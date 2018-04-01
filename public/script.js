@@ -28,7 +28,7 @@ $(document).ready(function(){
 function populatePlayerRecord($playerSummaryCard, snap) {
     $playerSummaryCard.attr('data-id', snap.key);
     $('.playerName',$playerSummaryCard).text(snap.child('name').val());
-    $('.playerPoints',$playerSummaryCard).text(snap.child('totalPoints').val());
+    $('.playerPoints',$playerSummaryCard).text(parseFloat(snap.child('totalPoints').val()).toFixed(2));
     $('tr.won td', $playerSummaryCard).text(snap.child('won').numChildren());
     $('tr.lost td', $playerSummaryCard).text(snap.child('lost').numChildren());
 }
@@ -167,7 +167,7 @@ $('#recordMatchModal #saveChanges').on('click', function(){
         if (isWinner)
         {
             playersRef.child(selectedUserId).once('value', snap => {
-                var currentPoints = snap.child('totalPoints').val()
+                var currentPoints = parseFloat(snap.child('totalPoints').val()).toFixed(2)
                 updates['/players/'+selectedUserId+'/totalPoints'] = currentPoints + matchPoints;
             });
         }

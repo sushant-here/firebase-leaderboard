@@ -93,7 +93,7 @@ function buildGraph() {
             }
             else
             {
-                dataset.data.push(snap.child('totalPoints').val());
+                dataset.data.push(parseFloat(snap.child('totalPoints').val()).toFixed(2));
             }
         });
 
