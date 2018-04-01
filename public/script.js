@@ -184,7 +184,7 @@ $('#recordMatchModal #saveChanges').on('click', function(){
         if (isWinner)
         {
             playersRef.child(selectedUserId).once('value', snap => {
-                var currentPoints = parseFloat(snap.child('totalPoints').val()).toFixed(2)
+                var currentPoints = parseFloat(snap.child('totalPoints').val());
                 updates['/players/'+selectedUserId+'/totalPoints'] = currentPoints + matchPoints;
             });
         }
