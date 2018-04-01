@@ -69,4 +69,5 @@ AB vs C  | C       | C gets 2 points (C defied the oods and won - gets extra poi
 
 ## Known issues
 
-1. The list of players on the left (**PLAYERS**) is initially loaded showing with the top 3 players by points. These points are updated - as are the number of won / lost games. However the ranking of the players does not change.
+1. Any change in player rankings are not displayed as points are entered. This includes the list of players on the left (**PLAYERS**) and the graph of rankings. They are initially loaded showing players by rank of total points. These points are updated as are the number of won / lost games. However the ranking of the players does not *visually* change.
+2. There is no security
