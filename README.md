@@ -50,12 +50,12 @@ pointsPerWinner = (1/numberOfWinners) * numberOfLoosers
 
 Points are allocated as follows:...
 
-Players | Winners | Points
------------- | ------------- | ----
-A vs B | A | A gets 1 point
-AB vs CD | AB | A and B get 1 point each
-AB vs C | AB | A and B get 0.5 points each (2 vs 1 is **unfair**)
-AB vs C | C  | C gets 2 points (C defied the oods and won - gets extra points)
+ Players | Winners | Points
+-------- | ------- | --------------------------------
+A vs B   | A       | A gets 1 point
+AB vs CD | AB      | A and B get 1 point each
+AB vs C  | AB      | A and B get 0.5 points each (2 vs 1 is **unfair**)
+AB vs C  | C       | C gets 2 points (C defied the oods and won - gets extra points)
 
 
 ## Known issues
