@@ -1,9 +1,24 @@
 # Firebase Leaderboard
-Leaderboard Utilising Firebase Database
+Leaderboard webapp utilising Firebase Database
 
 ## How to access
 
 To access the hosted leaderboard go to:... https://fooseball-a0b25.firebaseapp.com/
+
+## Structure
+```
+https://github.com/sushant40/firebase-leaderboard
+├── README.md
+├── firebase.json
+└── public
+    ├── 404.html
+    ├── dashboard.css
+    ├── index.html
+    ├── leaderChart.js
+    └── script.js
+```
+
+The public folder can be statically deployed and used to serve up the webapp.
 
 ## How to setup with your own Firebase
 
