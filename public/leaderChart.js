@@ -115,7 +115,7 @@ function buildGraph() {
             }
             else
             {
-                dataset.data[userDataIndex] = snap.child('totalPoints').val();
+                dataset.data[userDataIndex] = parseFloat(snap.child('totalPoints').val()).toFixed(2);
             }
         });
 
